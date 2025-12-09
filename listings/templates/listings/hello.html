@@ -1,19 +1,17 @@
-<html>
+{% extends "listings/base.html" %}
 
-    <head>
-        <title>Merchex</title>
-    </head>
+{% block content %}
 
-    <body>
-        <h1>Hello World!</h1>
-        <p>I have {{bands|length}} favorite bands:</p>
-        <ul>
-            {% for band in bands %}
-            <li>
-                {{band.name}}
-            </li>
-            {% endfor %}
-        </ul>
-    </body>
+<h1>Hello World!</h1>
 
-</html>
+<p>I have {{bands|length}} favorite bands:</p>
+
+<ul>
+    {% for band in bands %}
+    <li>
+        {{band.name}}
+    </li>
+    {% endfor %}
+</ul>
+
+{% endblock %}
