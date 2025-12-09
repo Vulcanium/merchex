@@ -1,0 +1,19 @@
+<html>
+
+    <head>
+        <title>Merchex</title>
+    </head>
+
+    <body>
+        <h1>Hello World!</h1>
+        <p>I have {{bands|length}} favorite bands:</p>
+        <ul>
+            {% for band in bands %}
+            <li>
+                {{band.name}}
+            </li>
+            {% endfor %}
+        </ul>
+    </body>
+
+</html>
