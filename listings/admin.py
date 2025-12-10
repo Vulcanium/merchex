@@ -9,7 +9,7 @@ class BandAdmin(admin.ModelAdmin):
 
 # Class for displaying the fields of the Listing model directly in the list of objects in the Django Admin interface
 class ListingAdmin(admin.ModelAdmin):
-    list_display = ['title', 'sold', 'type']
+    list_display = ['title', 'band', 'sold', 'type']
 
 
 admin.site.register(Band, BandAdmin)

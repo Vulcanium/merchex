@@ -18,6 +18,17 @@ class Band(models.Model):
     active = models.fields.BooleanField(default=True)
     official_homepage = models.fields.URLField(null=True, blank=True)
 
+    """
+    To display the band's name directly in the Django Admin object list
+    (not required if it has been added in a ModelAdmin).
+
+    Or when selecting it as a foreign key in the Django Admin
+    (required if we don't want to see something like
+    "Band object (id_number)").
+    """
+    def __str__(self):
+        return f"{self.name}"
+
 
 class Listing(models.Model):
 
@@ -32,3 +43,15 @@ class Listing(models.Model):
     sold = models.fields.BooleanField(default=False)
     year = models.fields.IntegerField(null=True, blank=True, validators=[MinValueValidator(1900), MaxValueValidator(datetime.now().year)])
     type = models.fields.CharField(choices=Type.choices, max_length=5)
+    band = models.ForeignKey(Band, null=True, on_delete=models.SET_NULL)
+
+    """
+    To display the listing's title directly in the Django Admin object list
+    (not required if it has been added in a ModelAdmin).
+
+    Or when selecting it as a foreign key in the Django Admin
+    (required if we don't want to see something like
+    "Listing object (id_number)").
+    """
+    def __str__(self):
+        return f"{self.title}"
