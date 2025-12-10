@@ -1,0 +1,21 @@
+{% extends "listings/base.html" %}
+
+{% block content %}
+
+<h2>{{ listing.title }}</h2>
+
+<ul>
+    <li>Type: {{ listing.get_type_display }}</li>
+
+    {% if listing.year %}
+    <li>Year of the item: {{ listing.year }}</li>
+    {% endif %}
+
+    <li>Sold: {{ listing.sold | yesno }}</li>
+</ul>
+
+<p>{{ listing.description }}</p>
+
+<a href="{% url 'listing-list' %}">Back to the list of listings</a>
+
+{% endblock %}
