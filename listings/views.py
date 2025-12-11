@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.core.mail import send_mail
 
-from listings.forms import ContactUsForm
+from listings.forms import ContactUsForm, BandForm, ListingForm
 from listings.models import Band, Listing
 
 
@@ -15,6 +15,26 @@ def band_detail(request, band_id):
     return render(request, "listings/band_detail.html", {"band": band})
 
 
+def band_create(request):
+
+    if request.method == 'POST':
+        # Create an instance of our form and populate it with the POST data
+        form = BandForm(request.POST)
+
+        if form.is_valid():
+            # Create a new "Band", save it to the database, and redirects to the detail page of the band we just created
+            band = form.save()
+            return redirect("band-detail", band.id)
+        
+        # If the form is not valid, we let the execution continue down to the return below and display the form again (with errors)
+
+    else:
+        # This must be a GET request, so create an empty form
+        form = BandForm()
+
+    return render(request, "listings/band_create.html", {"form" : form})
+
+
 def listing_list(request):
     listings = Listing.objects.all()
     return render(request, "listings/listing_list.html", {"listings": listings})
@@ -23,6 +43,27 @@ def listing_list(request):
 def listing_detail(request, listing_id):
     listing = Listing.objects.get(id = listing_id)
     return render(request, "listings/listing_detail.html", {"listing": listing})
+
+
+def listing_create(request):
+    
+    if request.method == 'POST':
+        # Create an instance of our form and populate it with the POST data
+        form = ListingForm(request.POST)
+
+        if form.is_valid():
+            # Create a new "Listing", save it to the database, and redirects to the detail page of the listing we just created
+            listing = form.save()
+            return redirect("listing-detail", listing.id)
+        
+        # If the form is not valid, we let the execution continue down to the return below and display the form again (with errors)
+
+    else:
+        # This must be a GET request, so create an empty form
+        form = ListingForm()
+    
+
+    return render(request, "listings/listing_create.html", {"form" : form})
 
 
 def contact(request):
@@ -41,7 +82,7 @@ def contact(request):
 
             return redirect("email-sent")
 
-        # if the form is not valid, we let the execution continue down to the return below and display the form again (with errors).
+        # If the form is not valid, we let the execution continue down to the return below and display the form again (with errors)
 
     else:
         # This must be a GET request, so create an empty form
