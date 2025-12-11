@@ -18,6 +18,8 @@
 
 <a href="{% url 'listing-update' listing.id %}">Edit this listing</a>
 
-<a href="{% url 'listing-list' %}">Back to the list of listings</a>
+- <a href="{% url 'listing-delete' listing.id %}">Delete this listing</a>
+
+- <a href="{% url 'listing-list' %}">Back to the list of listings</a>
 
 {% endblock %}
