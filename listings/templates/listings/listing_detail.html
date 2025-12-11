@@ -16,6 +16,8 @@
 
 <p>{{ listing.description }}</p>
 
+<a href="{% url 'listing-update' listing.id %}">Edit this listing</a>
+
 <a href="{% url 'listing-list' %}">Back to the list of listings</a>
 
 {% endblock %}

@@ -35,6 +35,24 @@ def band_create(request):
     return render(request, "listings/band_create.html", {"form" : form})
 
 
+def band_update(request, band_id):
+    band = Band.objects.get(id = band_id)
+
+    if request.method == 'POST':
+        # Pre-fill the form with new data and with data from the Band object retrieved from the database
+        form = BandForm(request.POST, instance = band)
+
+        if form.is_valid():
+            # Update the existing band in the database and redirect to the detail page of the band we just updated
+            form.save()
+            return redirect("band-detail", band.id)
+    else:
+        # Pre-fill the form with data from the Band object retrieved from the database
+        form = BandForm(instance = band)
+
+    return render(request, "listings/band_update.html", {"form" : form})
+
+
 def listing_list(request):
     listings = Listing.objects.all()
     return render(request, "listings/listing_list.html", {"listings": listings})
@@ -64,6 +82,24 @@ def listing_create(request):
     
 
     return render(request, "listings/listing_create.html", {"form" : form})
+
+
+def listing_update(request, listing_id):
+    listing = Listing.objects.get(id = listing_id)
+
+    if request.method == 'POST':
+        # Pre-fill the form with new data and with data from the Listing object retrieved from the database
+        form = ListingForm(request.POST, instance = listing)
+
+        if form.is_valid():
+            # Update the existing listing in the database and redirect to the detail page of the listing we just updated
+            form.save()
+            return redirect("listing-detail", listing.id)
+    else:
+        # Pre-fill the form with data from the Listing object retrieved from the database
+        form = ListingForm(instance = listing)
+
+    return render(request, "listings/listing_update.html", {"form" : form})
 
 
 def contact(request):
