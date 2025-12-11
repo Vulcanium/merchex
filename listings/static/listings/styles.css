@@ -1,1 +1,8 @@
-* { background: white }
+* {
+    background: white
+}
+
+.errorlist {
+    margin-bottom: -10px;
+    color: red
+}
